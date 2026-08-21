@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — C&D</title>
+<meta name="description" content="Complete your demo order at C&D — a frontend-only checkout experience.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============================= HEADER ============================= -->
+<header class="site-header">
+  <nav class="nav wrap">
+    <a href="index.html" class="logo">C&amp;D</a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="index.html#new-arrivals">New Arrivals</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="icon-btn" id="cartToggle" aria-label="Open cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 6h2l2.4 12.4a2 2 0 002 1.6h8.4a2 2 0 002-1.6L20 8H6"/><circle cx="9" cy="21" r="1"/><circle cx="17" cy="21" r="1"/></svg>
+        <span class="cart-count" data-empty="true">0</span>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- =========================== PAGE HEADER =========================== -->
+<div class="page-header">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">Home</a> / <a href="shop.html">Shop</a> / Checkout</div>
+    <span class="eyebrow">Almost There</span>
+    <h1>Checkout</h1>
+  </div>
+</div>
+
+<!-- ============================== CHECKOUT ============================ -->
+<section class="block">
+  <div class="wrap checkout-grid">
+
+    <!-- Left column: form (or success state) -->
+    <div id="checkoutFormCol">
+      <form id="checkoutForm" novalidate>
+
+        <div class="checkout-panel">
+          <h3><span class="step-no">1</span>Customer Information</h3>
+
+          <div class="field">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" placeholder="e.g. Adaeze Okafor">
+            <div class="field-error">Please enter your full name.</div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" placeholder="you@email.com">
+              <div class="field-error">Please enter a valid email address.</div>
+            </div>
+            <div class="field">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" placeholder="e.g. 0803 123 4567">
+              <div class="field-error">Please enter a valid phone number.</div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="address">Address</label>
+            <input type="text" id="address" placeholder="Street address">
+            <div class="field-error">Please enter your address.</div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="city">City</label>
+              <input type="text" id="city" placeholder="e.g. Port Harcourt">
+              <div class="field-error">Please enter your city.</div>
+            </div>
+            <div class="field">
+              <label for="state">State</label>
+              <input type="text" id="state" placeholder="e.g. Rivers">
+              <div class="field-error">Please enter your state.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="checkout-panel">
+          <h3><span class="step-no">2</span>Delivery</h3>
+          <div class="delivery-options">
+            <label class="delivery-option selected" onclick="selectDelivery(2000, this)">
+              <input type="radio" name="delivery" value="2000" checked>
+              <div class="delivery-option-info">
+                <b>Standard Delivery</b>
+                <span>3–5 business days</span>
+              </div>
+              <span class="delivery-option-price">₦2,000</span>
+            </label>
+            <label class="delivery-option" onclick="selectDelivery(5000, this)">
+              <input type="radio" name="delivery" value="5000">
+              <div class="delivery-option-info">
+                <b>Express Delivery</b>
+                <span>1–2 business days</span>
+              </div>
+              <span class="delivery-option-price">₦5,000</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="checkout-panel">
+          <h3><span class="step-no">3</span>Place Your Order</h3>
+          <p style="color:var(--ink-soft); font-size:0.88rem; margin-bottom:1rem;">Choose how you'd like to place your order.</p>
+          
+          <button type="button" class="btn btn-block whatsapp-btn" id="whatsappOrderBtn" style="margin-top:0.8rem;">
+            Order via WhatsApp
+          </button>
+          
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Right column: order summary -->
+    <div class="summary-panel">
+      <div class="checkout-panel summary-panel-wrap">
+        <h3>Order Summary</h3>
+        <div id="checkoutItems"></div>
+        <div id="checkoutTotals" style="margin-top:1rem;"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================= FOOTER =============================== -->
+<footer class="site-footer">
+  <div class="wrap">
+
+    <div class="footer-bottom">
+      <span>© 2026 C&D</span>
+      <a href="index.html">Back to Home</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ======================== CART DRAWER (global) ====================== -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <h3>Your Cart</h3>
+    <button class="icon-btn" id="cartClose" aria-label="Close cart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-summary" id="cartSummary"></div>
+</aside>
+
+<script src="script.js"></script>
+</body>
+</html>
