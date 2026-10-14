@@ -40,7 +40,7 @@ const CLOTHING_CATEGORIES = ["Dresses", "Tops", "Trousers", "Skirts"];
 
 /* Replace this with the real business WhatsApp number (with country code, no + or spaces)
    before deploying, e.g. "2348012345678". */
-const YOUR_WHATSAPP_NUMBER = "234000000000";
+const YOUR_WHATSAPP_NUMBER = "2349037509328";
 
 /* ==========================================================================
    2. UTILITIES
